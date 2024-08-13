@@ -17,6 +17,8 @@ import { getUsers } from "./routes/get-users"
 import { deleteRoom } from "./routes/delete-room"
 
 const app = fastify()
+const port = env.PORT || 3001;
+const host = '0.0.0.0';
 
 const io = new SocketServer(app.server, {
     cors: {
@@ -45,6 +47,6 @@ app.register(updateUser, io)
 
 app.register(deleteRoom, io)
 
-app.listen({ port: env.PORT || 3001 }).then(() => {
-    console.log("Server running!")
+app.listen({ host, port }).then(() => {
+    console.log(`Server running on http://${host}:${port}`)
 })
