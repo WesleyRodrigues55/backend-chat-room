@@ -45,6 +45,6 @@ app.register(updateUser, io)
 
 app.register(deleteRoom, io)
 
-app.listen({ port: env.PORT }).then(() => {
+app.listen({ port: env.PORT || 3001 }).then(() => {
     console.log("Server running!")
 })
