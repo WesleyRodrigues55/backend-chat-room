@@ -22,12 +22,12 @@ const host = '0.0.0.0';
 
 const io = new SocketServer(app.server, {
     cors: {
-        origin: "https://frontend-chat-room.vercel.app/",
+        origin: "*",
     }
 });
 
 app.register(cors, {
-    origin: "https://frontend-chat-room.vercel.app/",
+    origin: "*",
 })
 
 app.setValidatorCompiler(validatorCompiler)
