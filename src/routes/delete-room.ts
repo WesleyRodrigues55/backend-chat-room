@@ -30,6 +30,12 @@ export async function deleteRoom(app: FastifyInstance, io: SocketServer) {
             throw new ClientError("Room not found.")
         }
 
+        await prisma.reaction.deleteMany({
+            where: {
+                room_id: roomId,
+            }
+        })
+
         await prisma.chatRoom.deleteMany({
             where: {
                 room_id: roomId,
