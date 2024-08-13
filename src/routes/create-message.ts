@@ -28,7 +28,8 @@ export async function createMessage(app: FastifyInstance, io: SocketServer) {
                 user_id: userId,
                 room_id: roomId,
                 message,
-                created_at
+                created_at,
+                react: 0
             }
         })
 

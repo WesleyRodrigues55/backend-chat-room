@@ -15,10 +15,12 @@ import { updateUser } from "./routes/update-user"
 import { getUser } from "./routes/get-user"
 import { getUsers } from "./routes/get-users"
 import { deleteRoom } from "./routes/delete-room"
+import { reactMessage } from "./routes/create-react-message";
 
 const app = fastify()
 const port = env.PORT || 3001;
 const host = '0.0.0.0';
+// const host = 'localhost';
 
 const io = new SocketServer(app.server, {
     cors: {
@@ -44,6 +46,7 @@ app.register(getUser)
 app.register(getUsers)
 
 app.register(updateUser, io)
+app.register(reactMessage, io)
 
 app.register(deleteRoom, io)
 

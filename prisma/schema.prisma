@@ -12,8 +12,9 @@ model Room {
   name       String
   created_at DateTime @default(now())
 
-  users     User[]
   chat_room ChatRoom[]
+  users     User[]
+  Reaction  Reaction[]
 
   @@map("rooms")
 }
@@ -24,8 +25,9 @@ model User {
   room_id String
   active  Boolean
 
-  room      Room       @relation(fields: [room_id], references: [id])
   chat_room ChatRoom[]
+  room      Room       @relation(fields: [room_id], references: [id])
+  reaction  Reaction[]
 
   @@map("users")
 }
@@ -36,9 +38,24 @@ model ChatRoom {
   room_id    String
   message    String
   created_at DateTime @default(now())
+  react      Int
 
-  room Room @relation(fields: [room_id], references: [id])
-  user User @relation(fields: [user_id], references: [id])
+  user     User       @relation(fields: [user_id], references: [id])
+  room     Room       @relation(fields: [room_id], references: [id])
+  reaction Reaction[]
 
   @@map("chat_rooms")
+}
+
+model Reaction {
+  id           String @id @default(uuid())
+  chat_room_id String
+  user_id      String
+  room_id      String
+
+  room      Room     @relation(fields: [room_id], references: [id])
+  chat_room ChatRoom @relation(fields: [chat_room_id], references: [id])
+  user      User     @relation(fields: [user_id], references: [id])
+
+  @@map("reactions")
 }

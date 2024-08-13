@@ -31,7 +31,8 @@ export async function getMessage(app: FastifyInstance) {
                 room_id: roomId
             },
             include: {
-                user: true
+                user: true,
+                reaction: true
             }
         })
 
